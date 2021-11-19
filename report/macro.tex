@@ -1,0 +1,33 @@
+% general formatting and stuff
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{ifthen}
+\usepackage{lineno}
+
+% subject specific
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics, physconst, physunits}
+
+% drawing
+\usepackage{pstricks}
+\usepackage{tikz, tkz-orm, pgfplots}
+\usetikzlibrary{arrows,shapes,backgrounds,decorations.markings}
+\usetikzlibrary{matrix,positioning,decorations.pathreplacing,calc,tikzmark}
+\pgfplotsset{width=7.5cm,compat=1.16}
+\usepgfplotslibrary{fillbetween}
+
+% links
+\usepackage{hyperref, bookmark}
+
+% notes
+\newcommand{\notes}[1]{}
+
+\ifthenelse{\value{notes} > 0}{
+    \renewcommand{\notes}[1]{{\textcolor{red}{[Note: #1]}}}
+}{}
+
+% actual macros
+\newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\naturals}{\ensuremath{\mathbb{N}}}
+\newcommand{\complex}{\ensuremath{\mathbb{C}}}

@@ -1,0 +1,44 @@
+\documentclass[
+    paper=a4, 
+    lang=en, 
+    font=kpfonts, 
+    hanging-titles,
+    draft]
+{skrapport} 
+\colortheme{skdoc}
+
+% meta info
+\title{
+    {Information Theoretic Error Bounds on NISQ Learning Systems} \\
+    {\large B.Tech Project I}    
+    }
+\author[sgambhir@iitb.ac.in]{Sankalp Gambhir}
+\date{\today}
+
+% setup packages, macros, notes
+\newcounter{notes}
+\setcounter{notes}{1}
+\input{macro}
+
+\begin{document}
+
+    \begin{titlepage}
+        \maketitle
+        \begin{abstract}
+            Bla bla.
+        \end{abstract}        
+    \end{titlepage}
+
+    \tableofcontents
+
+    \section{Introduction}
+        \label{sec:intro}
+        \input{section/intro}
+    
+    \section{Preliminaries}
+        \label{sec:prelim}
+        \input{section/prelim}
+
+    % \bibliographystyle{unsrt}
+    % \bibliography{biblio.bib}
+\end{document}
