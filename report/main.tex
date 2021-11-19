@@ -3,7 +3,7 @@
     lang=en, 
     font=kpfonts, 
     hanging-titles=true,
-    draft
+    final
 ]
 {skrapport} 
 \colortheme{skdoc}
@@ -26,11 +26,11 @@
     \begin{titlepage}
         \maketitle
         \begin{abstract}
-            Bla bla.
+            \lipsum[1]
         \end{abstract}        
     \end{titlepage}
 
-    \tableofcontents
+    \tableofcontents \pagebreak
 
     \section{Introduction}
         \label{sec:intro}
@@ -39,6 +39,22 @@
     \section{Preliminaries}
         \label{sec:prelim}
         \input{section/prelim}
+
+    \section{Variational Quantum Algorithms}
+        \label{sec:vqa}
+        \input{section/vqa}
+
+    \section{Quantum Support Vector Machine}
+        \label{sec:qsvm}
+        \input{section/qsvm}
+    
+    \section{Information Theoretic Limits}
+        \label{sec:infolimits}
+        \input{section/infolimits}
+
+    \section{Conclusion and Future Work}
+        \label{sec:future}
+        \input{section/future}
 
     \phantomsection
     \addcontentsline{toc}{section}{References}
