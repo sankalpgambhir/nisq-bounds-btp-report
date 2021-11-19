@@ -1,6 +1,127 @@
-Test.
+% classical prelims
+\subsection{Classical Computing}
+% learning
+\subsubsection{Learning Problem}
+Learning \cite{cristianini2000introduction} can be broadly defined as attempting
+to learn the input-output pattern given sample data. For this thesis, we
+consider three major categories of learning problems:
+
+\begin{itemize}
+    \item Binary Classification --- input points in a chosen domain, and a
+    binary output label for each point.
+    \item Multi-Label Classification --- input points in a chosen domain, and
+    one of \(n\) labels as output for each point.
+    \item Regression --- input points in a chosen domain with real-valued output.
+\end{itemize}
+
+% classification problem
+\subsubsection{Classification Problem}
+We take as input elements \(\{x_i\}\), generally called \emph{feature vectors},
+in a chosen domain \(\featurespace\) called the \emph{feature space} and output
+an element from a finite set \(\labelset = {l_i}\) of labels. \notes{Add a nice picture}
+
+The problem is called binary classification if \(\absolutevalue{\labelset} =
+2\).
+
+Formally, we attempt to learn a function \(f: \featurespace \to \labelset\)
+given a set of inputs in the domain, and possibly paired output labels.
+
+The problem proceeds in two manners given the form of inputs: if provided
+input-output pairs, the problem is called a \emph{supervised learning problem},
+while attempting to learn a set of labels given just (clustered) inputs is
+called \emph{unsupervised} learning. We focus on supervised classification here.
+
+The set of input-output pairs provided is called the \emph{training data}.
+
+Given the difficulty of working with discretized domains, the input domain is
+generally converted to be a subset of a Euclidean space, using a suitable
+\emph{embedding function}.
+
+% embedding
+\subsubsection{Embedding}
+An embedding of \(X\) in \(Y\) is a function \(f:X \to Y\) that is injective and
+structure-preserving. The exact restrictions on the map to be
+structure-preserving depend on the structures of the domain and the codomain
+\cite{sankappanavar1981course}. It is denoted here as \(f:X\hookrightarrow Y\).
+
+For example, a topological embedding, i.e., the embedding of a topological
+space, will be restricted to preserve its associated structure of open sets. A
+field embedding, similarly, will be restricted to preserve the field operations
+\(+\) and \(\times\).
+
+For a given feature space \(\featurespace\), it is generally embedded into
+\(\reals^n\) for some \(n\).
+
+% linear classification
+\subsubsection{Linear Classification}
+Classification generally proceeds by producing linear functions as candidate
+(supplemented with a discretization function) labelling functions and fitting
+them to the training data. For simplicity, we first restrict the discussion to
+binary classifiers.
+
+\begin{figure*}[h]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        % unsep bs
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % draw negative dots
+            \fill[black] (0.5,1.5)    circle (3pt);
+            \fill[black] (2.0,2.7)   circle (3pt);
+            \fill[black] (1.0,3.4)   circle (3pt);
+            \fill[black] (3.0,2.0)   circle (3pt);
+            \fill[black] (1.5,1.0)   circle (3pt);
+            \fill[black] (2.5,0.5)   circle (3pt);
+            % draw positive dots
+            \draw[black] (3.5,1.5)     circle (3pt);
+            \draw[black] (2.5,1.7)     circle (3pt);
+            \draw[black] (1.5,2.3)     circle (3pt);
+            \draw[black] (0.5,3.0)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Unseparated data}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        % nice and separated
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % separator
+            \draw (-0.5, 4.0) -- (4.0,0.0) [dashed];
+            % draw negative dots
+            \fill[black] (0.5,1.5)    circle (3pt);
+            \fill[black] (1.5,1.7)    circle (3pt);
+            \fill[black] (2.0,0.5)    circle (3pt);
+            \fill[black] (1.0,2.3)    circle (3pt);
+            \fill[black] (2.5,0.6)    circle (3pt);
+            % draw positive dots
+            \draw[black] (3.5,1.5)     circle (3pt);
+            \draw[black] (2.5,2.0)     circle (3pt);
+            \draw[black] (1.5,3.5)     circle (3pt);
+            \draw[black] (1.0,4.0)     circle (3pt);
+            \draw[black] (0.5,3.8)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Strongly separated data}
+    \end{subfigure}
+    \caption{The magic of the (strong) separation axiom.}
+\end{figure*}
+
+Given a set of points which, due to an embedding, may be assumed to be in
+\(\featurespace\subseteq\reals^n\), attempting to classify them may still be an
+arduous task if the spatial regions corresponding to the labels are intertwined.
+Thus, to make the problem tractable, we restrict the data to be \emph{strongly}
+separated, i.e., any labelling function \(f:\featurespace \to \labelset\) that
+agrees with the training data \notes{try to write separation properly}.
+
+% probability distribution separation?
+% svm
 
 % qm prelims
+\subsection{Quantum Computing}
 % hilbert space
 % quantum computer
 % quantum embedding
