@@ -4,10 +4,13 @@
 \usepackage{ragged2e}
 \usepackage{ifthen}
 \usepackage{lineno}
+\usepackage{booktabs}
+\usepackage{subcaption}
 
 % subject specific
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{physics, physconst, physunits}
+\newtheorem{axiom}{Axiom}
 
 % drawing
 \usepackage{pstricks}
@@ -17,8 +20,15 @@
 \pgfplotsset{width=7.5cm,compat=1.16}
 \usepgfplotslibrary{fillbetween}
 
-% links
+% links and citations
 \usepackage{hyperref, bookmark}
+\hypersetup{hidelinks} % hide boxes around links ew
+\usepackage{csquotes}
+\usepackage[
+    style=numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{biblio.bib}
 
 % notes
 \newcommand{\notes}[1]{}
@@ -31,3 +41,5 @@
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
 \newcommand{\naturals}{\ensuremath{\mathbb{N}}}
 \newcommand{\complex}{\ensuremath{\mathbb{C}}}
+\newcommand{\featurespace}{X}
+\newcommand{\labelset}{L}
