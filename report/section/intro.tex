@@ -1,31 +1,35 @@
 % intro.tex
 
 % intro to problems of learning and classification
-There has been long standing interest in learning from data and extrapolating
-experimental data to make useful predictions using computers about as long as
-computers have existed. In the last few decades, with computing power
-skyrocketing exponentially coupled with leaping advances in theory of learning
-systems and statistical inference, these problems became tractable and
-eventually came into use ubiquitously. With applications ranging from facial
-detection systems for surveillence to identifying cosmic objects for cosmology,
-they have found widespread adoption in industry and academia. With their advent,
-however, has come an ever rising need for computing power. This has found data
-centers of unprecendented scales consuming enormous amounts of power to provide
-the instant predictions we've come to rely on.
+There has been long standing interest in constructing systems capable of
+learning from experience since even before computers in their modern form have
+existed. In the last few decades, with computing power skyrocketing
+exponentially coupled with leaping advances in theory of learning systems and
+statistical inference, these problems became tractable and eventually came into
+use ubiquitously. With applications ranging from facial detection systems for
+surveillence to identifying cosmic objects for cosmology, they have found
+widespread adoption in industry and academia. These systems circumvent the need
+to produce a precise mathematical model for the problem at hand, exploiting
+general techniques to instead infer a model from available data. With their
+advent, however, has come an ever rising need for computing power to facilitate
+their operation. This has found data centers of unprecendented scales consuming
+enormous amounts of power to provide the instant predictions we've come to rely
+on.
 
 % intro to how quantum may solve it
 With snowballing energy and space requirements of classical computers in the
-form of GPU clusters and ASICs, there has been a spark of interest in offloading
-this computation onto quantum computers, which, till recently, have largely
-remained a rare species spotted only in labs surrounded by helium-cooled
-superconductors and white-coated predators. Current scales of available quantum
-computers, however, still lack the power required to fully tackle these
-challenges while maintaining reliable error-levels or adding their own error
-checking and correction. This has motivated using quantum computers to run
-bottnecked computational subroutines with classical control systems. These
-systems generally lack error correction, and thus earn themselves the title of
-`noisy'. These form the basis of computation considered in this thesis, Noisy
-Intermediate-Scale Quantum (NISQ) computers.
+form of GPU clusters and Application Specific Integrated-Circuits (ASICs), there
+has been a spark of interest in offloading this computation onto quantum
+computers, which, till recently, have largely remained a rare species spotted
+only in labs surrounded by helium-cooled superconductors and white-coated
+predators. Current scales of available quantum computers, however, still lack
+the power required to fully tackle these challenges while maintaining reliable
+error-levels or adding their own error checking and correction. This has
+motivated using quantum computers to run bottnecked computational subroutines
+with classical control systems. These systems generally lack error correction,
+and thus earn themselves the title of `noisy'. These form the basis of
+computation considered in this thesis, Noisy Intermediate-Scale Quantum (NISQ)
+computers.
 
 Connecting a quantum computer to a classical puppeteer is not expected to come
 without its own issues either. It constrains the architecture and is itself
