@@ -51,8 +51,8 @@ space, will be restricted to preserve its associated structure of open sets. A
 field embedding, similarly, will be restricted to preserve the field operations
 \(+\) and \(\times\).
 
-For a given feature space \(\featurespace\), it is generally embedded into
-\(\reals^n\) for some \(n\).
+For a given arbitrary feature space \(\featurespace\), it is generally embedded
+into \(\reals^n\) for some \(n\).
 
 % linear classification
 \subsubsection{Linear Classification}
@@ -119,10 +119,158 @@ Thus, to make the problem tractable, we restrict the data to be \emph{strongly}
 separated, i.e., any labelling function \(f:\featurespace \to \labelset\) that
 agrees with the training data \notes{try to write separation properly}.
 
-% probability distribution separation?
+% probability distribution separation? TODO
+% inner product space? TODO
+
 % svm
 \subsubsection{Support Vector Machine}
-Stuff. \notes{Write something here}
+A support vector machine is a classifier model which constructs a hyperplane or
+a set of hyperplanes in the feature space optimising classifier separation
+depending on the objective \cite{cortes1995support}.
+
+We will synonymously use the terms `Support Vector Machine' and that of its
+common model `Maximal Margin Classifier', which is more appropriately what we
+use here.
+
+As the name suggests, a maximal margin classifier SVM tries not only to
+construct a set of hyperplanes, but to find the set such that their margin from
+the data is maximised. This builds upon the intuitive idea of a good separator
+being further away from the given data points. See \autoref{fig:maxmargin}.
+
+
+\begin{figure*}[h]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        % unsep bs
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % classifier
+            \draw[red, thick] (0.0, 4.0) -- (4.0, 0.0);
+            \draw[->, thin] (1.0, 1.0) -- (2.0, 2.0);
+            \draw[->, thick] (4.0, 4.0) -- node[near end, right] {\scriptsize Dominating Margin} (2.0, 2.0);
+            \draw (3.0, 5.0) -- (5.0, 3.0) [dashed];
+            \draw (0.0, 2.0) -- (2.0, 0.0) [dashed];
+            % draw negative dots
+            \fill[black] (1,1)    circle (3pt);
+            % draw positive dots
+            \draw[black] (4,4)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Unoptimized margins}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        % nice and separated
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % classifier
+            \draw[red, thick] (0.5, 4.5) -- (4.5, 0.5);
+            \draw[->] (1.0, 1.0) -- (2.5, 2.5);
+            \draw[->] (4.0, 4.0) -- node[near end, right] {\scriptsize Equal Margins} (2.5, 2.5);
+            \draw (3.0, 5.0) -- (5.0, 3.0) [dashed];
+            \draw (0.0, 2.0) -- (2.0, 0.0) [dashed];
+            % draw negative dots
+            \fill[black] (1,1)    circle (3pt);
+            % draw positive dots
+            \draw[black] (4,4)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Maximal margin classifier}
+    \end{subfigure}
+    \caption{Illustration of different margins for hyperplanes.}
+    \label{fig:maxmargin}
+\end{figure*}
+
+Formally, we characterize a hyperplane in \(\reals^n\) as a pair \((\vecw, b)\),
+with \(\vecw \in \reals^n\) and \(b \in \reals\), such that for all points
+\(\vecx\) on the hyperplane
+
+\begin{gather*}
+    \innerprod{\vecw}{\vecx} + b = 0~.
+\end{gather*}
+
+Geometrically, \(\vecw\) is the vector normal to the hyperplane, and \(b\)
+is the bias or offset from origin.
+
+Note that by moving to \(\reals^{n+1}\), we can convert the hyperplane to one
+without bias (passing through the origin)
+
+\begin{gather*}
+    \innerprod{\vecw}{\vecx} + b = 0~,\\
+    \innerprod{(\vecw \oplus \begin{pmatrix}
+        b
+    \end{pmatrix})} {(\vecx \oplus \begin{pmatrix}
+        1
+    \end{pmatrix})} + 0 = 0~.
+\end{gather*}
+
+which is the hyperplane \((\vecw \oplus \begin{pmatrix}b\end{pmatrix}, 0)\) in
+\(\reals^{n+1}\). So, without loss of generality, we work with hyperplanes
+without bias.
+
+Now, given the training dataset \({(\vec{x_i}, y_i)}\), with \(y_i = \pm 1\), we
+can write constraints on \(\vecw\) as
+
+\begin{gather}
+    \forall i\; y_i \cdot \innerprod{\vecw}{\vec{x_i}} > 0~,
+\end{gather}
+
+that is, \(x_i\) is on the same side of the hyperplane as indicated by \(y_i\)
+as the sign of the inner product corresponds to the same. 
+
+By scaling \(\vecw\) (without changing the hyperplane), we can construct the
+constraint system
+
+\begin{gather}
+    \forall i\; y_i \cdot \innerprod{\vecw}{\vec{x_i}} \geq 1~.
+\end{gather}
+
+Since we are scaling \(\vecw\), we choose an appropriate optimization target,
+its norm.
+
+Since this is a constrained optimization, we write its Lagrangian
+
+\begin{gather}
+    \mathcal{L}(\vecw, \vec{\alpha}) = \frac{1}{2} \innerprod{\vecw}{\vecw} + \sum_i \alpha_i \left[y_i \cdot \innerprod{\vecw}{\vec{x_i}}\right]~,
+\end{gather}
+
+where \(\{\alpha_i\}\) are the Lagrangian multipliers. For the optimal solution,
+the Lagrangian is stationary, i.e.,
+
+\begin{gather}
+    \frac{\partial \mathcal{L}(\vecw, \vec{\alpha})}{\partial \vecw} = 0~,\nonumber\\
+    \vecw - \sum_i \alpha_i y_i \vec{x_i} = 0~.
+\end{gather}
+
+Substituting this expression for \(\vecw\) in the Lagrangian itself, we get \notes{work out the substitution}
+
+\begin{gather}
+    \mathcal{L}(\vecw, \vec{\alpha}) = \frac{1}{2} \innerprod{\vecw}{\vecw} + \sum_i \alpha_i \left[y_i \cdot \innerprod{\vecw}{\vec{x_i}}\right]~,
+\end{gather}
+
+By maximising this Lagrangian with respect to the parameters \(\{\alpha_i\}\),
+we obtain an optimal \(\vecw\) which is the maximum margin classifier.
+
+With \(\vecw\) fixed at its optimal value, we get a simple computational method
+to classify all new incoming points \(\vecx \in \reals^n\), given by
+
+\begin{gather}
+    \text{sgn}(\innerprod{\vecw}{\vecx})
+\end{gather}
+
+returning a label \(\pm 1\) (or anomalously zero, if you happen to pick a point
+on the hyperplane, which can be remedied by making one side's boundary soft).
+
+% how optimise
+\subsubsection{Optimisation Techniques}
+Gradient descent or st. \notes{expand}
+
+% error introduction
+\subsubsection{Generalisation Error}
+Hello \notes{read about gen error and write here}
 
 % qm prelims
 \subsection{Quantum Regime}
