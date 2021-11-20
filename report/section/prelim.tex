@@ -13,14 +13,16 @@ consider three major categories of learning problems:
     binary output label for each point.
     \item Multi-Label Classification --- input points in a chosen domain, and
     one of \(n\) labels as output for each point.
-    \item Regression --- input points in a chosen domain with real-valued output.
+    \item Regression --- input points in a chosen domain with real-valued
+    output.
 \end{itemize}
 
 % classification problem
 \subsubsection{Classification Problem}
 We take as input elements \(\{x_i\}\), generally called \emph{feature vectors},
 in a chosen domain \(\featurespace\) called the \emph{feature space} and output
-an element from a finite set \(\labelset = {l_i}\) of labels. \notes{Add a nice picture}
+an element from a finite set \(\labelset = {l_i}\) of labels. \notes{Add a nice
+picture}
 
 The problem is called binary classification if \(\absolutevalue{\labelset} =
 2\).
@@ -245,7 +247,8 @@ the Lagrangian is stationary, i.e.,
     \vecw - \sum_i \alpha_i y_i \vec{x_i} = 0~.
 \end{gather}
 
-Substituting this expression for \(\vecw\) in the Lagrangian itself, we get \notes{work out the substitution}
+Substituting this expression for \(\vecw\) in the Lagrangian itself, we get
+\notes{work out the substitution}
 
 \begin{gather}
     \mathcal{L}(\vecw, \vec{\alpha}) = \frac{1}{2} \innerprod{\vecw}{\vecw} + \sum_i \alpha_i \left[y_i \cdot \innerprod{\vecw}{\vec{x_i}}\right]~,
