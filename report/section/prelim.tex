@@ -279,11 +279,49 @@ Hello \notes{read about gen error and write here}
 \subsection{Quantum Regime}
 \notes{add a general introduction}
 
-% schrodinger
-\subsubsection{Schr\"odinger Equation}
-
 % hilbert space
 \subsubsection{Hilbert Space}
+\begin{definition}
+    A Hilbert space is a vector space \(\hilbertspace\) equipped with an inner
+    product \(\innerproductabstract{f}{g} \;\forall f, g \in \hilbertspace\) such that
+    the norm defined by
+
+    \begin{equation*}
+        \norm{f} = \sqrt{\innerproductabstract{f}{f}}
+    \end{equation*}
+
+    turns \(\hilbertspace\) into a complete metric space
+    \cite{sansone1959orthogonal}.
+\end{definition}
+
+Physical quantities --- such as energy, momentum, and position --- are
+represented as operators over a Hilbert space \(\hilbertspace\) to which the
+wavefunctions belong \cite{hall2013quantum}. 
+
+Herein, the inner product is assumed to be linear in the second factor, i.e.,
+
+\begin{equation*}
+    \innerproductabstract{f}{\lambda g} = \lambda \innerproductabstract{f}{g}; \quad \innerproductabstract{\lambda f}{g} = \conjugate{\lambda} \innerproductabstract{f}{g}
+\end{equation*}
+
+\(\forall f, g \in \hilbertspace\) and \(\lambda\) in the base field
+\(\mathbb{F}\). For our purposes, we will assume \(\hilbertspace\) to always
+have as its base field the field of complex numbers, \(\complex\).
+
+We will assume relevant quantities to be linear operators \(\cdot :
+\hilbertspace \to \hilbertspace\) with adjoints where necessary,
+\cite[see][Appendix A]{hall2013quantum} for details.
+
+% schrodinger
+\subsubsection{Schr\"odinger Equation}
+Given a \emph{Hamiltonian} operator \(\hamiltonian\) for a system represented by
+a wavefunction \(\psi\), its time evolution is given by the Schr\"odinger
+equation,
+
+\begin{equation}
+    \frac{\dd{\psi}}{\dd{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
+    \label{eq:schrodinger}
+\end{equation}
 
 % quantum computer
 \subsubsection{Quantum Computation}
