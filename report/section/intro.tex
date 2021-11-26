@@ -31,13 +31,25 @@ and thus earn themselves the title of `noisy'. These form the basis of
 computation considered in this thesis, Noisy Intermediate-Scale Quantum (NISQ)
 computers.
 
-Connecting a quantum computer to a classical puppeteer is not expected to come
-without its own issues either. It constrains the architecture and is itself
-bottlenecked on both ends, first by the parameter transfer and configuration
-from the classical to the quantum, then finally by the detectors on the quantum
-side to the classical. In this thesis, we focus on the former, discussing the
-limits of computation and computational precision achievable with this hybrid
-architecture.
+These methods have been applied to a myriad of problems where a quantum
+advantage is expected, and have earned themselves the name `Variational Quantum
+Algorithms (VQAs)'. VQAs are characterized by parametrized quantum circuits,
+wherein the parameters are controlled by a classical computer running an
+optimization routine, updating them based on the measurement outcomes of the
+circuit. The technique has shown great promise and bypasses several of the
+issues arising from the lack of capability for error checking and correction, in
+turn arising from the small number of available qubits, in quantum computers
+expected to be manufactured within the next few years. The bulk of the
+computation requiring memory, such as parameter updation and gradient
+computation for optimization is generally performed on the classical controller.
+
+However, connecting a quantum computer to a classical puppeteer is not expected
+to come without its own issues either. It constrains the architecture and is
+itself bottlenecked on both ends, first by the parameter transfer and
+configuration from the classical to the quantum, then finally by the detectors
+on the quantum side to the classical. In this thesis, we focus on the former,
+discussing the limits of computation and computational precision achievable with
+this hybrid architecture.
 
 % report structure
 \subsection{Structure}
