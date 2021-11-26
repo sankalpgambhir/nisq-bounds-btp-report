@@ -118,8 +118,10 @@ Given a set of points which, due to an embedding, may be assumed to be in
 \(\featurespace\subseteq\reals^n\), attempting to classify them may still be an
 arduous task if the spatial regions corresponding to the labels are intertwined.
 Thus, to make the problem tractable, we restrict the data to be \emph{strongly}
-separated, i.e., any labelling function \(f:\featurespace \to \labelset\) that
-agrees with the training data \notes{try to write separation properly}.
+separated, i.e., assume that there always exists a set hyperplanes (of size
+\(|L| - 1\)) that isolates the points with each label within the domains created
+by intersection. In the binary case, this is just one label on either side of
+the hyperplane.
 
 % probability distribution separation? TODO
 % inner product space? TODO
@@ -267,13 +269,27 @@ to classify all new incoming points \(\vecx \in \reals^n\), given by
 returning a label \(\pm 1\) (or anomalously zero, if you happen to pick a point
 on the hyperplane, which can be remedied by making one side's boundary soft).
 
+As the major `quantum' modification, we will discuss how the bottlenecked linear
+algebra computation is offloaded to a quantum circuit in \autoref{sec:vqa}.
+
 % how optimise
 \subsubsection{Optimisation Techniques}
-Gradient descent or st. \notes{expand}
+The discussion of optimization techniques in classical computing is a long and
+arduous one. We refer the reader to a common text on the matter for a detailed
+discussion \notes{add some citations}, while reviewing the general ideas briefly
+here.
 
-% error introduction
-\subsubsection{Generalisation Error}
-Hello \notes{read about gen error and write here}
+% actual discussion of common techniques
+
+In a NISQ system, there is generally little to no attempt at error correction,
+and the general goal is to capitalize on what is possible with the short
+available coherence times, without devoting a majority of the system's resources
+to error checking and correction. As such, these systems are unable to support
+high-depth circuits with computationally involved analytical gradient based
+approaches. An effective optimizer in control of such a temporally-bound circuit
+should try to utilize techniques minimizing the number of measurements or
+function evalutations, as the relevant modules generally form the bottleneck of
+the computation \cite[see][chapter II.D]{bharti2021noisy}.
 
 % qm prelims
 \subsection{Quantum Regime}
