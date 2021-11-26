@@ -35,6 +35,8 @@ input-output pairs, the problem is called a \emph{supervised learning problem},
 while attempting to learn a set of labels given just (clustered) inputs is
 called \emph{unsupervised} learning. We focus on supervised classification here.
 
+\notes{explain unsupervised learning}
+
 The set of input-output pairs provided is called the \emph{training data}.
 
 Given the difficulty of working with discretized domains, the input domain is
@@ -44,9 +46,10 @@ generally converted to be a subset of a Euclidean space, using a suitable
 % embedding
 \subsubsection{Embedding}
 An embedding of \(X\) in \(Y\) is a function \(f:X \to Y\) that is injective and
-structure-preserving. The exact restrictions on the map to be
-structure-preserving depend on the structures of the domain and the codomain
-\cite{sankappanavar1981course}. It is denoted here as \(f:X\hookrightarrow Y\).
+such that \(\text{image}(X) \subseteq Y\) has the same structure as \(X\). The
+exact restrictions on the map to be structure-preserving depend on the
+structures of the domain and the codomain \cite{sankappanavar1981course}. It is
+denoted here as \(f:X\hookrightarrow Y\).
 
 For example, a topological embedding, i.e., the embedding of a topological
 space, will be restricted to preserve its associated structure of open sets. A
@@ -59,7 +62,7 @@ into \(\reals^n\) for some \(n\).
 % linear classification
 \subsubsection{Linear Classification}
 Classification generally proceeds by producing linear functions as candidate
-(supplemented with a discretization function) labelling functions and fitting
+labelling functions (supplemented with a discretization function) and fitting
 them to the training data. For simplicity, we first restrict the discussion to
 binary classifiers.
 
@@ -204,16 +207,12 @@ without bias (passing through the origin)
 
 \begin{gather*}
     \innerprod{\vecw}{\vecx} + b = 0~,\\
-    \innerprod{(\vecw \oplus \begin{pmatrix}
-        b
-    \end{pmatrix})} {(\vecx \oplus \begin{pmatrix}
-        1
-    \end{pmatrix})} + 0 = 0~.
+    \innerprod{(\vecw \oplus [b])}{(\vecx \oplus [1])} + 0 = 0~.
 \end{gather*}
 
-which is the hyperplane \((\vecw \oplus \begin{pmatrix}b\end{pmatrix}, 0)\) in
-\(\reals^{n+1}\). So, without loss of generality, we work with hyperplanes
-without bias.
+which is the hyperplane \((\vecw \oplus [b], 0)\) in \(\reals^{n+1}\), and
+\([b]\) is the one element vector containing \(b\). So, without loss of
+generality, we work with hyperplanes without bias.
 
 Now, given the training dataset \({(\vec{x_i}, y_i)}\), with \(y_i = \pm 1\), we
 can write constraints on \(\vecw\) as
@@ -246,7 +245,7 @@ the Lagrangian is stationary, i.e.,
 
 \begin{gather}
     \frac{\partial \mathcal{L}(\vecw, \vec{\alpha})}{\partial \vecw} = 0~,\nonumber\\
-    \vecw - \sum_i \alpha_i y_i \vec{x_i} = 0~.
+    \vecw + \sum_i \alpha_i y_i \vec{x_i} = 0~.
 \end{gather}
 
 Substituting this expression for \(\vecw\) in the Lagrangian itself, we get
@@ -267,7 +266,8 @@ to classify all new incoming points \(\vecx \in \reals^n\), given by
 \end{gather}
 
 returning a label \(\pm 1\) (or anomalously zero, if you happen to pick a point
-on the hyperplane, which can be remedied by making one side's boundary soft).
+on the hyperplane, which can be remedied by making one side's boundary soft, by
+changing \(>\) to \(\geq\)).
 
 As the major `quantum' modification, we will discuss how the bottlenecked linear
 algebra computation is offloaded to a quantum circuit in \autoref{sec:vqa}.
@@ -285,14 +285,15 @@ The goal of an optimization problem, given (generally) a function
 inverse in the domain, i.e., output a point \(x_* \in X\), such that
 
 \begin{gather*}
-    x_* = \text{arg min } \loss(x)~.
+    x_* = \text{arg min } \loss(x)~,
 \end{gather*}
 
-In some problems, a local minima may suffice, and in others, a global minima may
-be the requirement. Depending on the nature of the domain \(X\), different
-techniques may be employed to find \(x_*\). These include gradient descent and
-its reductions (finite element methods, etc), Hessian-aided descent,  stochastic
-gradient descent, among others. The rest of the discussion is agnostic of the
+or the argument to \(\loss\) which minimizes it. In some problems, a local
+minima may suffice, and in others, a global minima may be the requirement.
+Depending on the nature of the domain \(X\), different techniques may be
+employed to find \(x_*\). These include gradient descent and its reductions
+(finite element methods, etc), Hessian-aided descent,  stochastic gradient
+descent, among others. The rest of the discussion is agnostic of the
 optimization routine, beyond, of course, the existence of one.
 
 In a NISQ system, there is generally little to no attempt at error correction,
@@ -327,16 +328,24 @@ the computation \cite[see][chapter II.D]{bharti2021noisy}.
 Physical quantities --- such as energy, momentum, and position --- are
 represented as operators over a Hilbert space \(\hilbertspace\) to which the
 wavefunctions belong \cite{hall2013quantum}. 
+For our purposes, we will assume \(\hilbertspace\) to always
+have as its base field the field of complex numbers, \(\complex\).
 
-Herein, the inner product is assumed to be linear in the second factor, i.e.,
+Herein, the complex inner product is assumed to be linear in the second factor,
+i.e.,
 
 \begin{equation*}
     \innerproductabstract{f}{\lambda g} = \lambda \innerproductabstract{f}{g}; \quad \innerproductabstract{\lambda f}{g} = \conjugate{\lambda} \innerproductabstract{f}{g}
 \end{equation*}
 
-\(\forall f, g \in \hilbertspace\) and \(\lambda\) in the base field
-\(\mathbb{F}\). For our purposes, we will assume \(\hilbertspace\) to always
-have as its base field the field of complex numbers, \(\complex\).
+\(\forall f, g \in \hilbertspace\) and \(\lambda \in \complex\). 
+
+For every bounded operator \(A\) acting on a Hilbert Space, there is a unique
+bounded operator \(A^*\) called its \emph{adjoint} such that
+
+\begin{equation*}
+    \innerproductabstract{f}{Ag} = \innerproductabstract{A^*f}{g}~.
+\end{equation*}
 
 We will assume relevant quantities to be linear operators \(\cdot :
 \hilbertspace \to \hilbertspace\) with adjoints where necessary,
@@ -349,7 +358,7 @@ a wavefunction \(\psi\), its time evolution is given by the Schr\"odinger
 equation,
 
 \begin{equation}
-    \frac{\dd{\psi}}{\dd{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
+    \frac{\partial{\psi}}{\partial{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
     \label{eq:schrodinger}
 \end{equation}
 
