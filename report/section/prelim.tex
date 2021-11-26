@@ -276,10 +276,24 @@ algebra computation is offloaded to a quantum circuit in \autoref{sec:vqa}.
 \subsubsection{Optimisation Techniques}
 The discussion of optimization techniques in classical computing is a long and
 arduous one. We refer the reader to a common text on the matter for a detailed
-discussion \notes{add some citations}, while reviewing the general ideas briefly
-here.
+discussion \cite{boyd2004convex,nocedal2006numerical}, while reviewing the
+general ideas briefly here.
 
 % actual discussion of common techniques
+The goal of an optimization problem, given (generally) a function
+\(\loss:X\to\reals\) is to find the minimum value in its range, and sometimes an
+inverse in the domain, i.e., output a point \(x_* \in X\), such that
+
+\begin{gather*}
+    x_* = \text{arg min } \loss(x)~.
+\end{gather*}
+
+In some problems, a local minima may suffice, and in others, a global minima may
+be the requirement. Depending on the nature of the domain \(X\), different
+techniques may be employed to find \(x_*\). These include gradient descent and
+its reductions (finite element methods, etc), Hessian-aided descent,  stochastic
+gradient descent, among others. The rest of the discussion is agnostic of the
+optimization routine, beyond, of course, the existence of one.
 
 In a NISQ system, there is generally little to no attempt at error correction,
 and the general goal is to capitalize on what is possible with the short
