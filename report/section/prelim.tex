@@ -21,8 +21,7 @@ consider three major categories of learning problems:
 \subsubsection{Classification Problem}
 We take as input elements \(\{x_i\}\), generally called \emph{feature vectors},
 in a chosen domain \(\featurespace\) called the \emph{feature space} and output
-an element from a finite set \(\labelset = {l_i}\) of labels. \notes{Add a nice
-picture}
+an element from a finite set \(\labelset = {l_i}\) of labels.
 
 The problem is called binary classification if \(\absolutevalue{\labelset} =
 2\).
@@ -35,8 +34,6 @@ input-output pairs, the problem is called a \emph{supervised learning problem},
 while attempting to learn a set of labels given just (clustered) inputs is
 called \emph{unsupervised} learning. We focus on supervised classification here.
 
-\notes{explain unsupervised learning}
-
 The set of input-output pairs provided is called the \emph{training data}.
 
 Given the difficulty of working with discretized domains, the input domain is
@@ -48,7 +45,7 @@ generally converted to be a subset of a Euclidean space, using a suitable
 An embedding of \(X\) in \(Y\) is a function \(f:X \to Y\) that is injective and
 such that \(\text{image}(X) \subseteq Y\) has the same structure as \(X\). The
 exact restrictions on the map to be structure-preserving depend on the
-structures of the domain and the codomain \cite{sankappanavar1981course}. It is
+structures of the domain and the co-domain \cite{sankappanavar1981course}. It is
 denoted here as \(f:X\hookrightarrow Y\).
 
 For example, a topological embedding, i.e., the embedding of a topological
@@ -121,7 +118,7 @@ Given a set of points which, due to an embedding, may be assumed to be in
 \(\featurespace\subseteq\reals^n\), attempting to classify them may still be an
 arduous task if the spatial regions corresponding to the labels are intertwined.
 Thus, to make the problem tractable, we restrict the data to be \emph{strongly}
-separated, i.e., assume that there always exists a set hyperplanes (of size
+separated, i.e., assume that there always exists a set of hyperplanes (of size
 \(|L| - 1\)) that isolates the points with each label within the domains created
 by intersection. In the binary case, this is just one label on either side of
 the hyperplane.
@@ -132,7 +129,7 @@ the hyperplane.
 % svm
 \subsubsection{Support Vector Machine}
 A support vector machine is a classifier model which constructs a hyperplane or
-a set of hyperplanes in the feature space optimising classifier separation
+a set of hyperplanes in the feature space optimizing classifier separation
 depending on the objective \cite{cortes1995support}.
 
 We will synonymously use the terms `Support Vector Machine' and that of its
@@ -141,7 +138,7 @@ use here.
 
 As the name suggests, a maximal margin classifier SVM tries not only to
 construct a set of hyperplanes, but to find the set such that their margin from
-the data is maximised. This builds upon the intuitive idea of a good separator
+the data is maximized. This builds upon the intuitive idea of a good separator
 being further away from the given data points. See \autoref{fig:maxmargin}.
 
 
@@ -248,28 +245,24 @@ the Lagrangian is stationary, i.e.,
     \vecw + \sum_i \alpha_i y_i \vec{x_i} = 0~.
 \end{gather}
 
-Substituting this expression for \(\vecw\) in the Lagrangian itself, we get
-\notes{work out the substitution}
-
-\begin{gather}
-    \mathcal{L}(\vecw, \vec{\alpha}) = \frac{1}{2} \innerprod{\vecw}{\vecw} + \sum_i \alpha_i \left[y_i \cdot \innerprod{\vecw}{\vec{x_i}}\right]~,
-\end{gather}
-
-By maximising this Lagrangian with respect to the parameters \(\{\alpha_i\}\),
-we obtain an optimal \(\vecw\) which is the maximum margin classifier.
+Substituting this expression for \(\vecw\) in the Lagrangian itself, we get a
+Lagrangian dependent solely on the parameters \(\{\alpha_i\}\) which we can
+optimize over. By minimizing this Lagrangian, we obtain an optimal \(\vecw\)
+which is the maximum margin classifier.
 
 With \(\vecw\) fixed at its optimal value, we get a simple computational method
 to classify all new incoming points \(\vecx \in \reals^n\), given by
 
 \begin{gather}
     \text{sgn}(\innerprod{\vecw}{\vecx})
+    \label{eq:svmclassifier}
 \end{gather}
 
 returning a label \(\pm 1\) (or anomalously zero, if you happen to pick a point
 on the hyperplane, which can be remedied by making one side's boundary soft, by
 changing \(>\) to \(\geq\)).
 
-As the major `quantum' modification, we will discuss how the bottlenecked linear
+As the major `quantum' modification, we will discuss how the bottle necked linear
 algebra computation is offloaded to a quantum circuit in \autoref{sec:vqa}.
 
 % how optimise
@@ -289,10 +282,10 @@ inverse in the domain, i.e., output a point \(x_* \in X\), such that
 \end{gather*}
 
 or the argument to \(\loss\) which minimizes it. In some problems, a local
-minima may suffice, and in others, a global minima may be the requirement.
+minima may suffice, and in others, a global minimum may be the requirement.
 Depending on the nature of the domain \(X\), different techniques may be
 employed to find \(x_*\). These include gradient descent and its reductions
-(finite element methods, etc), Hessian-aided descent,  stochastic gradient
+(finite element methods, etc.), Hessian-aided descent,  stochastic gradient
 descent, among others. The rest of the discussion is agnostic of the
 optimization routine, beyond, of course, the existence of one.
 
@@ -303,12 +296,11 @@ to error checking and correction. As such, these systems are unable to support
 high-depth circuits with computationally involved analytical gradient based
 approaches. An effective optimizer in control of such a temporally-bound circuit
 should try to utilize techniques minimizing the number of measurements or
-function evalutations, as the relevant modules generally form the bottleneck of
+function evaluations, as the relevant modules generally form the bottleneck of
 the computation \cite[see][chapter II.D]{bharti2021noisy}.
 
 % qm prelims
 \subsection{Quantum Regime}
-\notes{add a general introduction}
 
 % hilbert space
 \subsubsection{Hilbert Space}
@@ -352,28 +344,60 @@ We will assume relevant quantities to be linear operators \(\cdot :
 \cite[see][Appendix A]{hall2013quantum} for details.
 
 % schrodinger
-\subsubsection{Schr\"odinger Equation}
-Given a \emph{Hamiltonian} operator \(\hamiltonian\) for a system represented by
-a wavefunction \(\psi\), its time evolution is given by the Schr\"odinger
-equation,
+% \subsubsection{Schr\"odinger Equation}
+% Given a \emph{Hamiltonian} operator \(\hamiltonian\) for a system represented by
+% a wavefunction \(\psi\), its time evolution is given by the Schr\"odinger
+% equation,
 
-\begin{equation}
-    \frac{\partial{\psi}}{\partial{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
-    \label{eq:schrodinger}
-\end{equation}
+% \begin{equation}
+%     \frac{\partial{\psi}}{\partial{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
+%     \label{eq:schrodinger}
+% \end{equation}
 
 % quantum computer
 \subsubsection{Quantum Computation}
+In a quantum system, `computation' in its essence is jugglery of probability
+amplitudes of states using unitary actions. After action of unitaries as
+necessary, the coefficients are estimated using a measurement schema and
+post-processed to recover the computational result. See
+\cite{nielsen2002quantum} for a detailed study.
 
 % quantum embedding
 \subsubsection{State Construction and Embedding}
-
-% measurement
-\subsubsection{Measurement}
+To perform computation in the quantum regime, data first needs to be converted
+to a format in which it can be acted upon by quantum operators. This is again an
+embedding function, specifically from the input domain to the Hilbert space of
+quantum states for the system ansatz. See \cite{lloyd2020quantum} for details.
 
 % distance measures
 \subsubsection{Information Matrices and Distance Measures}
 \label{subsubsec:distanceinfo}
 
-Fubini-Study and Fisher Information, parametrized quantum states
-\cite{meyer2021fisher}.
+Consider a parametrized distance function on quantum states 
+
+\begin{equation}
+    d(\parameters, \parameters') = d(\rho(\parameters), \rho(\parameters'))~.
+\end{equation}
+
+For close enough \(\parameters\) and \(\parameters'\) we can write a Taylor
+expansion of the distance function. Clearly, the zeroth and first terms vanish,
+as the distance of a state from itself is zero, and it forms a minimum for the
+distance function. We have then the second order term
+
+\begin{equation}
+    d(\rho(\parameters), \rho(\parameters+\perturbdel)) = \frac{1}{2} \perturbdel^\top F(\parameters)\perturbdel~,
+\end{equation}
+
+with \(F\) representing the metric tensor
+
+\begin{equation}
+    F(\parameters) = \frac{\partial^2}{\partial\delta_i\partial\delta_j} d(\parameters, \parameters + \perturbdel) \bigg\vert_{\perturbdel = 0}~.
+\end{equation}
+
+Therefore, \(F\) captures all the information necessary to define a distance
+metric. \(F\) is called the Quantum Fisher Information Matrix
+\cite{meyer2021fisher}, and it is defined as
+
+\begin{equation}
+    \left[F_{ij}\right] = 4\text{Re} \left[\braket*{\partial_i\psi(\parameters)}{\partial_j\psi(\parameters)} - \braket*{\partial_i\psi(\parameters)}{\psi(\parameters)}\braket*{\psi(\parameters)}{\partial_j\psi(\parameters)}\right]~.
+\end{equation}

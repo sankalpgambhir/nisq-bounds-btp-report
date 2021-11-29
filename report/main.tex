@@ -48,7 +48,17 @@
     \begin{titlepage}
         \maketitle
         \begin{abstract}
-            \lipsum[1]
+            In this report, we review the classical classification problem,
+            common techniques to solve it, then identify bottle necked
+            computational steps. We introduce and review Variational Quantum
+            Algorithms (VQA), which form a model of computation on Noisy
+            Intermediate-Scale Quantum (NISQ) computers, to relieve the
+            computational burden in learning problems. We present a mathematical
+            review of the spatial structure of involved spaces, and discuss the
+            constraints on computational precision imposed by the architecture.
+            Finally, we discuss these information-theoretic bounds from contexts
+            in optimal control to generalize them to VQAs, and present a
+            resulting bound on Quantum Support Vector Machines (QSVMs).
         \end{abstract}
     \end{titlepage}
 
@@ -78,7 +88,11 @@
         \label{sec:future}
         \input{section/future}
 
+    \section*{Acknowledgements}
+        \label{sec:ack}
+        \input{section/ack}
+
     \phantomsection
-    \addcontentsline{toc}{section}{References}
+    % \addcontentsline{toc}{section}{References}
     \printbibliography
 \end{document}

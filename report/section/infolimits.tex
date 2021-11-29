@@ -3,18 +3,19 @@
 Having proposed a structure to solve learning problems with a NISQ system, we
 are ill-fated to then deal with the myriad of issues that arise with daring to
 use it. Barring issues specific to the quantum states, low coherence times,
-inaccurate measurements, et cetera \notes{cite something}, our structure itself
+inaccurate measurements, et cetera, our structure itself
 imposes some bottlenecks on what we can achieve with it. In particular, the act
-of converting and tranferring data between the representations used by the
+of converting and transferring data between the representations used by the
 quantum and classical halves induces the issue of information transfer and
 limits upon it. 
 
 The idea of information theoretic bounds goes back to the father of information
-theory, Claude Shannon himself \notes{cite shannon}. Work from Nyquist, Hartley,
-and Shannon \notes{cite} built up the structure of information theory to
-quantify the maximum `amount of data' that could be tranferred through a noisy
-communications channel and the changes to said effective `amount' on the
-implementation of error correcting codes over the channel.
+theory, Claude Shannon himself \cite{shannon1948mathematical}. Work from
+Nyquist, Hartley, and Shannon \cite{hartley1928transmission} built up the
+structure of information theory to quantify the maximum `amount of data' that
+could be transferred through a noisy communications channel and the changes to
+said effective `amount' on the implementation of error correcting codes over the
+channel.
 
 The analysis for the hybrid computing case has partially been performed in a
 general setting \cite{lloyd2014information}. The authors suggest in the paper an
@@ -70,6 +71,46 @@ where the functional \(\mathcal{F}\) quantifying the distance between states may
 also include constraints introduced via the Lagrangian multipliers
 \(\{\lambda_i\}\).
 
+To the end of this optimization, suppose one adjusts the control pulse with a
+classical channel. In the ideal noiseless case, Hartley's Law bounds the
+information transfer as
+
+\begin{equation}
+    b_\gamma = T\Delta\Omega\kappa_s~,
+\end{equation}
+
+where \(T\) is the pulse duration, \(\Delta\Omega\) the bandwidth, and
+\(\kappa_s\) is the bit depth of the pulse. With the control pulse \(\gamma\)'s
+extreme levels as \(\gamma_{max}\) and \(\gamma_{min}\), define \(\Delta\gamma =
+\gamma_{max} - \gamma{min}\). Finally, set the minimum variation to be
+\(\delta\gamma\). Then,
+
+\begin{equation}
+    \kappa_s = \text{log}(1+\frac{\Delta\gamma}{\delta\gamma})~.
+\end{equation}
+
+These parameters can be used to give an error bound on the achievable state
+\(\norm{\rho - \bar{\rho}} > \epsilon\), with
+
+\begin{equation}
+    \epsilon \geq 2^{\frac{T\Delta\Omega\kappa_s}{\dimD_\polyreachable}}~.
+\end{equation}
+
 For a detailed build up to the results, see \cite{lloyd2014information}.
 
-\subsection{Bounds on PQC Optimisation}
+\subsection{Bounds on PQC Optimization}
+
+Similar to the Optimal Control scenario, the VQA architecture also presents the
+same infrastructural bounds. It stands to reason that a similar result should
+extend to generation of unitaries using a PQC. This is suggested in
+\cite{lloyd2014information}, but not explored further. We seek to establish
+lower bounds on the information theoretic error on learning the unitaries in
+terms of the circuit parameters --- circuit width, depth, and choice of
+generators (ansatz).
+
+The bound requires establishing a distance and measure in the DLA to bound the
+number of \(\epsilon\)-balls required to cover the space. A candidate for this
+study is the idea of a Haar measure \cite{van1995haar}. Extending this result to
+usable bounds for the outputs requires further study of the maps discussed in
+\autoref{subsec:quantlandscape}. A preliminary result over the state space is
+discussed in \autoref{sec:qsvm}.

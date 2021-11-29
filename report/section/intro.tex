@@ -1,18 +1,18 @@
 % intro.tex
 
 % intro to problems of learning and classification
-There has been long standing interest in constructing systems capable of
+There has been long-standing interest in constructing systems capable of
 learning from experience since even before computers in their modern form have
 existed. In the last few decades, with computing power skyrocketing
 exponentially coupled with leaping advances in theory of learning systems and
 statistical inference, these problems became tractable and eventually came into
 use ubiquitously. With applications ranging from facial detection systems for
-surveillence to identifying cosmic objects for cosmology, they have found
+surveillance to identifying cosmic objects for cosmology, they have found
 widespread adoption in industry and academia. These systems circumvent the need
 to produce a precise mathematical model for the problem at hand, exploiting
 general techniques to instead infer a model from available data. With their
 advent, however, has come an ever rising need for computing power to facilitate
-their operation. This has found data centers of unprecendented scales consuming
+their operation. This has found data centers of unprecedented scales consuming
 enormous amounts of power to provide the instant predictions we've come to rely
 on.
 
@@ -25,7 +25,7 @@ only in labs surrounded by helium-cooled superconductors and white-coated
 predators. Current scales of available quantum computers, however, still lack
 the power required to fully tackle these challenges while maintaining reliable
 error-levels or adding their own error checking and correction. This has
-motivated using quantum computers to run bottnecked computational subroutines
+motivated using quantum computers to run bottle necked computational subroutines
 with classical control systems. These systems generally lack error correction,
 and thus earn themselves the title of `noisy'. These form the basis of
 computation considered in this thesis, Noisy Intermediate-Scale Quantum (NISQ)
@@ -45,7 +45,7 @@ computation for optimization is generally performed on the classical controller.
 
 However, connecting a quantum computer to a classical puppeteer is not expected
 to come without its own issues either. It constrains the architecture and is
-itself bottlenecked on both ends, first by the parameter transfer and
+itself bottle necked on both ends, first by the parameter transfer and
 configuration from the classical to the quantum, then finally by the detectors
 on the quantum side to the classical. In this thesis, we focus on the former,
 discussing the limits of computation and computational precision achievable with
@@ -54,7 +54,15 @@ this hybrid architecture.
 % report structure
 \subsection{Structure}
 In \autoref{sec:prelim}, definitions and relevant results in classical
-computing, physics, and quantum information are presented. \notes{Extend this.}
+computing, physics, and quantum information are presented.  \autoref{sec:vqa}
+reviews Variational Quantum Algorithms and their architecture, while
+\autoref{sec:infolimits} discusses bounds on their computational precision
+imposed by the architecture. Finally, \autoref{sec:qsvm} discusses Quantum
+Support Vector Machines and their error probabilities.
 
 \subsection{Outline of New Results}
-\notes{Add summary of results at the end.}
+We present the classical classification problem, the quantum SVM, and discuss
+how error bounds on parametrized quantum circuits extend to bounds on the error
+probabilities of the QSVM. Further work is initiated regarding estimating the
+error bounds for PQCs.
+
