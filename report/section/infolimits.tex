@@ -93,7 +93,7 @@ These parameters can be used to give an error bound on the achievable state
 \(\norm{\rho - \bar{\rho}} > \epsilon\), with
 
 \begin{equation}
-    \epsilon \geq 2^{\frac{T\Delta\Omega\kappa_s}{\dimD_\polyreachable}}~.
+    \epsilon \geq 2^{-\frac{T\Delta\Omega\kappa_s}{\dimD_\polyreachable}}~.
 \end{equation}
 
 For a detailed build up to the results, see \cite{lloyd2014information}.
@@ -114,3 +114,8 @@ study is the idea of a Haar measure \cite{van1995haar}. Extending this result to
 usable bounds for the outputs requires further study of the maps discussed in
 \autoref{subsec:quantlandscape}. A preliminary result over the state space is
 discussed in \autoref{sec:qsvm}.
+
+An alternate possible computation could use an error bound in real space
+\(\reals^M\) and use the map in \autoref{subsec:quantlandscape} to the unitary
+group to find an extended bound. This is much simpler compared to the ab initio
+calculation but does not necessarily give an exact bound.
