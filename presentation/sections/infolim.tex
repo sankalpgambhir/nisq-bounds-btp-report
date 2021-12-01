@@ -19,7 +19,7 @@
         where \(\Delta\Omega\) is the channel bandwidth and \(\kappa_s\) is the
         bit depth of the control signal (amount of information \emph{per}
         trasnfer).
-    \end{multicols}{2}
+    \end{multicols}
 
 \end{frame}
 
@@ -70,5 +70,98 @@
 \end{frame}
 
 % bounds on qsvm
+\begin{frame}
+    \frametitle{Quantum SVM}
+
+    Given training data embedded as n-qubit quantum states \(\{\ket*{x_i}\}\) with
+    corresponding labels \({y_i = \pm 1}\), a QSVM implemented as a VQA attempts to learn a
+    unitary \(\pqc(\parameters)\) such that
+
+    \begin{equation*}
+        \text{sgn }{\bra*{0}^{\otimes n}\pqc(\parameters)^*\ket*{x_i}} = y_i \forall i~.
+    \end{equation*}
+
+    Setting \(\ket*{w} = \pqc(\parameters)\ket*{0}^{\otimes n}\) recovers the
+    familiar classical SVM.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantum SVM --- Bounds}
+
+    \begin{multicols}{2}
+       \scalebox{0.55}{
+            \begin{minipage}{\textwidth}
+                \begin{figure}
+                    % error cones
+                    \centering
+                    \begin{tikzpicture}[>=stealth']
+                        % Draw axes
+                        \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                            |- (5,0) node (xaxis) [right] {};
+                        \draw [<->,thick] (0,-5) node (negyaxis) [above] {}
+                            |- (-5,0) node (negxaxis) [right] {};
+                        % classifier
+                        \draw[red, thick] (-4, -4) -- (4, 4);
+                        \draw[red, thick,->] (0, 0) -- node[very near end, right] {\(~\ket*{w}\)} (+1, -1);
+                        % error bars
+                        \draw (-3.5, -4.5) -- (3.5, 4.5) [dashed];
+                        \draw[->] (0, 0) -- (1.2, -0.8)[dashed];
+                        \draw (-4.5, -3.5) -- (4.5, 3.5) [dashed];
+                        \draw[->] (0, 0) -- node[very near end, below] {\(\ket*{w_\epsilon}\)} (0.8, -1.2)[dashed];
+                    \end{tikzpicture}
+                \end{figure}
+            \end{minipage}
+        }
+
+        Picking a point randomly in the space outside the training data and
+        attempting to classify it we find \cite{li2011concise}
+
+        \begin{align}
+            p_{\text{error}} &= \lim_{r\to \infty}\frac{2\cdot V_{\text{sector}}(r)}{V_{\text{sphere}}(r)} \nonumber\\
+                &= \lim_{r\to \infty}\frac{2\cdot V_{\text{sphere}}(r)\cdot 0.5\cdot I_{\text{sin}^2\phi}(\frac{n-1}{2}, \frac{1}{2})}{V_{\text{sphere}}(r)} \nonumber\\
+                &= I_{\text{sin}^2\phi}(\frac{n-1}{2}, \frac{1}{2})~.
+        \end{align}
+    \end{multicols}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantum SVM --- Bounds}
+    \begin{align}
+        p_{\text{error}}&= I_{\text{sin}^2\phi}(\frac{n-1}{2}, \frac{1}{2})~,
+    \end{align}
+
+    where \(I\) is the incomplete Beta function, 
+
+    \begin{equation}
+        I_x(a, b) = \frac{B(x; a, b)}{B(a, b)} = \frac{\int_0^x t^{a-1} (1-t)^{b-1} \dd t}{\int_0^1 t^{a-1} (1-t)^{b-1} \dd t}~,
+    \end{equation}
+
+    and \(\phi\) is the angular distortion, and it is seen from \(\ket*{w} =
+    \pqc(\parameters)\ket*{0}\) that \(\text{sin} \phi \sim \epsilon\). Finally,
+
+    \begin{align}
+        p_{\text{error}}&= I_{\epsilon^2}(\frac{n-1}{2}, \frac{1}{2})~.
+    \end{align}
+
+\end{frame}
 
 % proposed bounds on pqc
+\begin{frame}
+    \frametitle{Quantum SVM --- Bound plots}
+
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth]{figures/perrorplot.pdf}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantum SVM --- Bound plots}
+
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth]{figures/perrorscaled.pdf}
+    \end{figure}
+
+\end{frame}
