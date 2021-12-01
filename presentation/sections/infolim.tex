@@ -1,0 +1,74 @@
+% infolim.tex
+
+% why is there a limit?
+\begin{frame}
+    \frametitle{Information Theoretic Limits}
+
+    
+    \begin{multicols}{2}
+        \begin{figure}
+            \includegraphics[width=0.55\textwidth]{figures/vqaarch.pdf}
+        \end{figure}
+        %
+        The classical system transferring information about the parameters to
+        the PQC has a limit on how much information it can transfer in a given
+        time \(T\) given by
+        \begin{gather*}
+            b = T\Delta\Omega\kappa_s
+        \end{gather*}
+        where \(\Delta\Omega\) is the channel bandwidth and \(\kappa_s\) is the
+        bit depth of the control signal (amount of information \emph{per}
+        trasnfer).
+    \end{multicols}{2}
+
+\end{frame}
+
+% summary of bounds on qoc
+\begin{frame}
+    \frametitle{Example --- Bounds on Quantum Optical Control}
+
+    For the specific example of a control pulse for a quantum system
+
+    \begin{gather*}
+        \dot{\rho} = \mathcal{L}(\rho, \gamma(t))~,
+    \end{gather*}
+
+    where \(\rho\) is the state density matrix, \(\mathcal{L}\) is the
+    Liouvillian operator, and \(\gamma(t)\) is the control pulse. We have the
+    Hamiltonian
+
+    \begin{gather*}
+        \hamiltonian = \hamiltonian_D + \gamma(t)\cdot \hamiltonian_C~.
+    \end{gather*}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example --- Bounds on Quantum Optical Control}
+    
+    We have
+
+    \begin{gather*}
+        \kappa_s = \log (1 + \frac{\Delta\gamma}{\delta\gamma})~,
+    \end{gather*}
+
+    where \(\Delta\gamma\) and \(\delta\gamma\) are the maximum and minimum
+    variation in the control field.
+
+    We have the error bound \cite{lloyd2014information} \(\norm*{\rho-\rho_*} >
+    \epsilon\), with
+
+    \begin{gather*}
+        \epsilon \geq 2^{-\frac{T\Delta\Omega\kappa_s}{\dimD_\polyreachable}}~,
+    \end{gather*}
+
+    where \(\dimD_\polyreachable\) is the dimension of the relevant
+    (polynomially reachable) space of density matrices.
+
+    We intend to employ a similar technique to establish bounds on PQC errors.
+
+\end{frame}
+
+% bounds on qsvm
+
+% proposed bounds on pqc

@@ -1,0 +1,76 @@
+% main.tex
+% Bachelor's Thesis
+% ***
+%   Information Theoretic Error Bounds on 
+%   NISQ Learning Systems
+% ***
+% 2021-22
+% Sankalp Gambhir
+% 180260032
+
+\documentclass[
+    aspectratio=169
+]
+{beamer} 
+
+% meta info
+\title{
+    {\huge Information Theoretic Error Bounds on NISQ Learning Systems} \\
+    {\large B.Tech Project I}
+    }
+\author[sgambhir@iitb.ac.in]{
+    Sankalp Gambhir \\ 
+    \vspace{1em}
+        {
+            \normalsize 
+            \hspace{0.1em} 
+            Advisor:
+            Prof. Sai Vinjanampathy
+        }
+    \vspace{-1.3em}
+}
+\date{\today}
+
+% setup packages, macros, notes
+\newcounter{notes}
+\setcounter{notes}{1}
+\input{macro}
+
+\begin{document}
+
+    \begin{titlepage}
+        % title page title page
+    \end{titlepage}
+
+    % why qc?
+    % problems with it
+    \input{sections/qc}
+
+    % nisq
+    % what can it do?
+    \input{sections/nisq}
+
+    % classification problem
+    % classical optimization is hard
+    % but nisq compatible?
+    % lead up to vqa
+    \input{sections/classical}
+
+    % vqa
+    % components
+    % pqc
+    % dla
+    % qlt
+    \input{sections/vqa}
+
+    % info theory
+    % why limit
+    % qoc
+    % limits on svm
+    % experiments
+    \input{sections/infolim}
+
+    \begin{frame}{References}
+        \printbibliography
+    \end{frame}
+\end{document}

@@ -1,0 +1,75 @@
+% general formatting and stuff
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{ifthen}
+\usepackage{lineno}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{lipsum} % just to check formatting
+% \usepackage{titletoc}
+% \titlecontents{subsubsection}
+%               [3.3em]
+%               {\footnotesize\protect\addvspace{5pt}}%
+%               {\thecontentslabel~~}
+%               {}%
+%               {\hfill\contentspage}%
+
+% subject specific
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics, physconst, physunits}
+
+% drawing
+\usepackage{pstricks}
+\usepackage{tikz, tkz-orm, pgfplots}
+\usetikzlibrary{arrows,shapes,backgrounds,decorations.markings}
+\usetikzlibrary{matrix,positioning,decorations.pathreplacing,calc,tikzmark}
+\pgfplotsset{width=7.5cm,compat=1.16}
+\usepgfplotslibrary{fillbetween}
+
+% links and citations
+\usepackage{hyperref, bookmark}
+\hypersetup{hidelinks} % hide boxes around links ew
+% bls add color
+\usepackage{csquotes}
+\usepackage[
+    style=numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{biblio.bib}
+
+% notes
+\newcommand{\notes}[1]{}
+
+\ifthenelse{\value{notes} > 0}{
+    \renewcommand{\notes}[1]{{\textcolor{red}{[Note: #1]}}}
+}{}
+
+% actual macros
+\newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\naturals}{\ensuremath{\mathbb{N}}}
+\newcommand{\complex}{\ensuremath{\mathbb{C}}}
+\newcommand{\featurespace}{X}
+\newcommand{\labelset}{L}
+\newcommand{\innerproductabstract}[2]{\langle #1, #2\rangle}
+\newcommand{\conjugate}[1]{\bar{#1}}
+    % svm
+\newcommand{\vecw}{\vec{w}}
+\newcommand{\vecx}{\vec{x}}
+\newcommand{\vecb}{\vec{b}}
+\newcommand{\innerprod}[2]{\innerproductabstract{#1}{#2}}
+\newcommand{\trainset}{\mathcal{S}}
+    % quantum
+\newcommand{\hilbertspace}{\ensuremath{\mathcal{H}}}
+\newcommand{\hamiltonian}{\ensuremath{\hat{H}}}
+\newcommand{\parameters}{\vec{\theta}}
+\newcommand{\perturbdel}{\vec{\delta}}
+\newcommand{\loss}{\mathcal{L}}
+\newcommand{\pqc}{U}
+\newcommand{\genset}{\mathcal{G}}
+\newcommand{\dla}{\mathfrak{g}}
+\newcommand{\controlpulse}{\gamma}
+\newcommand{\dimD}{\mathcal{D}}
+\newcommand{\reachable}{\mathcal{W}}
+\newcommand{\polyreachable}{\mathcal{W^+}}
