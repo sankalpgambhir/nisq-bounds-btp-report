@@ -68,12 +68,15 @@
     Qubits scale exponentially in the amount of information they can contain. An
     n-qubit state can carry information equivalent to \(\sim 2^n\) complex numbers!
 
+    \pause
+
     \begin{figure}
         \centering
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[width=0.5\textwidth]{figures/blochsphere.png}
         \end{subfigure}
+        \pause
         \begin{subfigure}{0.45\textwidth}
             \centering
             \begin{gather*}
@@ -87,6 +90,8 @@
         \end{subfigure}
     \end{figure}
 
+    \pause
+
     The scale of computation is suddenly reduced. Instead of 40,000 dimension
     classical computation, we may only need \(\lceil{\log_2 (40000)}\rceil = 16\)
     qubit sized computation systems.
@@ -97,10 +102,15 @@
 \begin{frame}
     \frametitle{Quantum, sure, but NISQ?}
 
-    In the near term, it seems the required number of qubits to outpace
-    classical computers may not be out of reach. But can we reliably perform
-    those computations on our quantum computers? Short coherence times make this
-    impossible to do directly.
+    \begin{itemize}
+        \item In the near term, it seems the required number of qubits to outpace
+                classical computers may not be out of reach.
+        \item But can we reliably perform those computations on our quantum
+                computers?
+        \item Short coherence times make this impossible to do directly.
+    \end{itemize}
+
+    \pause
 
     Perhaps the constrained calculations can be processed as a subroutine? Yes,
     with \emph{Variational Quantum Algorithms}!
