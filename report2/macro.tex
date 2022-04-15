@@ -42,13 +42,17 @@
 \addbibresource{biblio.bib}
 
 % notes
+\usepackage{todonotes}
 \newcommand{\notes}[1]{}
+\newcommand{\listofnotes}[0]{}
 
 \ifthenelse{\value{notes} > 0}{
-    \renewcommand{\notes}[1]{{\textcolor{red}{[Note: #1]}}}
+    \renewcommand{\notes}[1]{\todo[noshadow]{#1}}
+    \renewcommand{\listofnotes}[0]{\listoftodos}
 }{}
 
 % actual macros
+\renewcommand{\iota}{i}
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
 \newcommand{\naturals}{\ensuremath{\mathbb{N}}}
 \newcommand{\complex}{\ensuremath{\mathbb{C}}}
