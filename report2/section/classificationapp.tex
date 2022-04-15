@@ -1,0 +1,264 @@
+% classificationapp.tex
+
+% learning
+\subsection{Learning Problem}
+Learning \cite{cristianini2000introduction} can be broadly defined as attempting
+to learn the input-output pattern given sample data. For this thesis, we
+consider three major categories of learning problems:
+
+\begin{itemize}
+    \item Binary Classification --- input points in a chosen domain, and a
+    binary output label for each point.
+    \item Multi-Label Classification --- input points in a chosen domain, and
+    one of \(n\) labels as output for each point.
+    \item Regression --- input points in a chosen domain with real-valued
+    output.
+\end{itemize}
+
+% classification problem
+\subsection{Classification Problem}
+We take as input elements \(\{x_i\}\), generally called \emph{feature vectors},
+in a chosen domain \(\featurespace\) called the \emph{feature space} and output
+an element from a finite set \(\labelset = {l_i}\) of labels.
+
+The problem is called binary classification if \(\absolutevalue{\labelset} =
+2\).
+
+Formally, we attempt to learn a function \(f: \featurespace \to \labelset\)
+given a set of inputs in the domain, and possibly paired output labels.
+
+The problem proceeds in two manners given the form of inputs: if provided
+input-output pairs, the problem is called a \emph{supervised learning problem},
+while attempting to learn a set of labels given just (clustered) inputs is
+called \emph{unsupervised} learning. We focus on supervised classification here.
+
+The set of input-output pairs provided is called the \emph{training data}.
+
+Given the difficulty of working with discretized domains, the input domain is
+generally converted to be a subset of a Euclidean space, using a suitable
+\emph{embedding function}.
+
+% embedding
+\subsection{Embedding}
+An embedding of \(X\) in \(Y\) is a function \(f:X \to Y\) that is injective and
+such that \(\text{image}(X) \subseteq Y\) has the same structure as \(X\). The
+exact restrictions on the map to be structure-preserving depend on the
+structures of the domain and the co-domain \cite{sankappanavar1981course}. It is
+denoted here as \(f:X\hookrightarrow Y\).
+
+For example, a topological embedding, i.e., the embedding of a topological
+space, will be restricted to preserve its associated structure of open sets. A
+field embedding, similarly, will be restricted to preserve the field operations
+\(+\) and \(\times\).
+
+For a given arbitrary feature space \(\featurespace\), it is generally embedded
+into \(\reals^n\) for some \(n\).
+
+% linear classification
+\subsection{Linear Classification}
+Classification generally proceeds by producing linear functions as candidate
+labelling functions (supplemented with a discretization function) and fitting
+them to the training data. For simplicity, we first restrict the discussion to
+binary classifiers.
+
+\begin{figure*}[ht]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        % unsep bs
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % draw negative dots
+            \fill[black] (0.5,1.5)    circle (3pt);
+            \fill[black] (2.0,2.7)   circle (3pt);
+            \fill[black] (1.0,3.4)   circle (3pt);
+            \fill[black] (3.0,2.0)   circle (3pt);
+            \fill[black] (1.5,1.0)   circle (3pt);
+            \fill[black] (2.5,0.5)   circle (3pt);
+            % draw positive dots
+            \draw[black] (3.5,1.5)     circle (3pt);
+            \draw[black] (2.5,1.7)     circle (3pt);
+            \draw[black] (1.5,2.3)     circle (3pt);
+            \draw[black] (0.5,3.0)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Unseparated data}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        % nice and separated
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % separator
+            \draw (-0.5, 4.0) -- (4.0,0.0) [dashed];
+            % draw negative dots
+            \fill[black] (0.5,1.5)    circle (3pt);
+            \fill[black] (1.5,1.7)    circle (3pt);
+            \fill[black] (2.0,0.5)    circle (3pt);
+            \fill[black] (1.0,2.3)    circle (3pt);
+            \fill[black] (2.5,0.6)    circle (3pt);
+            % draw positive dots
+            \draw[black] (3.5,1.5)     circle (3pt);
+            \draw[black] (2.5,2.0)     circle (3pt);
+            \draw[black] (1.5,3.5)     circle (3pt);
+            \draw[black] (1.0,4.0)     circle (3pt);
+            \draw[black] (0.5,3.8)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Strongly separated data}
+    \end{subfigure}
+    \caption{The magic of the (strong) separation axiom.}
+\end{figure*}
+
+Given a set of points which, due to an embedding, may be assumed to be in
+\(\featurespace\subseteq\reals^n\), attempting to classify them may still be an
+arduous task if the spatial regions corresponding to the labels are intertwined.
+Thus, to make the problem tractable, we restrict the data to be \emph{strongly}
+separated, i.e., assume that there always exists a set of hyperplanes (of size
+\(|L| - 1\)) that isolates the points with each label within the domains created
+by intersection. In the binary case, this is just one label on either side of
+the hyperplane.
+
+% probability distribution separation? TODO
+% inner product space? TODO
+
+% svm
+\subsection{Support Vector Machine}
+A support vector machine is a classifier model which constructs a hyperplane or
+a set of hyperplanes in the feature space optimizing classifier separation
+depending on the objective \cite{cortes1995support}.
+
+We will synonymously use the terms `Support Vector Machine' and that of its
+common model `Maximal Margin Classifier', which is more appropriately what we
+use here.
+
+As the name suggests, a maximal margin classifier SVM tries not only to
+construct a set of hyperplanes, but to find the set such that their margin from
+the data is maximized. This builds upon the intuitive idea of a good separator
+being further away from the given data points. See \autoref{fig:maxmargin}.
+
+
+\begin{figure*}[ht]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        % unsep bs
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % classifier
+            \draw[red, thick] (0.0, 4.0) -- (4.0, 0.0);
+            \draw[->, thin] (1.0, 1.0) -- (2.0, 2.0);
+            \draw[->, thick] (4.0, 4.0) -- node[near end, right] {\scriptsize Dominating Margin} (2.0, 2.0);
+            \draw (3.0, 5.0) -- (5.0, 3.0) [dashed];
+            \draw (0.0, 2.0) -- (2.0, 0.0) [dashed];
+            % draw negative dots
+            \fill[black] (1,1)    circle (3pt);
+            % draw positive dots
+            \draw[black] (4,4)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Unoptimized margins}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        % nice and separated
+        \centering
+        \begin{tikzpicture}[>=stealth']
+            % Draw axes
+            \draw [<->,thick] (0,5) node (yaxis) [above] {}
+                  |- (5,0) node (xaxis) [right] {};
+            % classifier
+            \draw[red, thick] (0.5, 4.5) -- (4.5, 0.5);
+            \draw[->] (1.0, 1.0) -- (2.5, 2.5);
+            \draw[->] (4.0, 4.0) -- node[near end, right] {\scriptsize Equal Margins} (2.5, 2.5);
+            \draw (3.0, 5.0) -- (5.0, 3.0) [dashed];
+            \draw (0.0, 2.0) -- (2.0, 0.0) [dashed];
+            % draw negative dots
+            \fill[black] (1,1)    circle (3pt);
+            % draw positive dots
+            \draw[black] (4,4)     circle (3pt);
+          \end{tikzpicture}
+          \caption{Maximal margin classifier}
+    \end{subfigure}
+    \caption{Illustration of different margins for hyperplanes.}
+    \label{fig:maxmargin}
+\end{figure*}
+
+Formally, we characterize a hyperplane in \(\reals^n\) as a pair \((\vecw, b)\),
+with \(\vecw \in \reals^n\) and \(b \in \reals\), such that for all points
+\(\vecx\) on the hyperplane
+
+\begin{gather*}
+    \innerprod{\vecw}{\vecx} + b = 0~.
+\end{gather*}
+
+Geometrically, \(\vecw\) is the vector normal to the hyperplane, and \(b\)
+is the bias or offset from origin.
+
+Note that by moving to \(\reals^{n+1}\), we can convert the hyperplane to one
+without bias (passing through the origin)
+
+\begin{gather*}
+    \innerprod{\vecw}{\vecx} + b = 0~,\\
+    \innerprod{(\vecw \oplus [b])}{(\vecx \oplus [1])} + 0 = 0~.
+\end{gather*}
+
+which is the hyperplane \((\vecw \oplus [b], 0)\) in \(\reals^{n+1}\), and
+\([b]\) is the one element vector containing \(b\). So, without loss of
+generality, we work with hyperplanes without bias.
+
+Now, given the training dataset \({(\vec{x_i}, y_i)}\), with \(y_i = \pm 1\), we
+can write constraints on \(\vecw\) as
+
+\begin{gather}
+    \forall i\; y_i \cdot \innerprod{\vecw}{\vec{x_i}} > 0~,
+\end{gather}
+
+that is, \(x_i\) is on the same side of the hyperplane as indicated by \(y_i\)
+as the sign of the inner product corresponds to the same. 
+
+By scaling \(\vecw\) (without changing the hyperplane), we can construct the
+constraint system
+
+\begin{gather}
+    \forall i\; y_i \cdot \innerprod{\vecw}{\vec{x_i}} \geq 1~.
+\end{gather}
+
+Since we are scaling \(\vecw\), we choose an appropriate optimization target,
+its norm.
+
+Since this is a constrained optimization, we write its Lagrangian
+
+\begin{gather}
+    \mathcal{L}(\vecw, \vec{\alpha}) = \frac{1}{2} \innerprod{\vecw}{\vecw} + \sum_i \alpha_i \left[y_i \cdot \innerprod{\vecw}{\vec{x_i}}\right]~,
+\end{gather}
+
+where \(\{\alpha_i\}\) are the Lagrangian multipliers. For the optimal solution,
+the Lagrangian is stationary, i.e.,
+
+\begin{gather}
+    \frac{\partial \mathcal{L}(\vecw, \vec{\alpha})}{\partial \vecw} = 0~,\nonumber\\
+    \vecw + \sum_i \alpha_i y_i \vec{x_i} = 0~.
+\end{gather}
+
+Substituting this expression for \(\vecw\) in the Lagrangian itself, we get a
+Lagrangian dependent solely on the parameters \(\{\alpha_i\}\) which we can
+optimize over. By minimizing this Lagrangian, we obtain an optimal \(\vecw\)
+which is the maximum margin classifier.
+
+With \(\vecw\) fixed at its optimal value, we get a simple computational method
+to classify all new incoming points \(\vecx \in \reals^n\), given by
+
+\begin{gather}
+    \text{sgn}(\innerprod{\vecw}{\vecx})
+    \label{eq:svmclassifier}
+\end{gather}
+
+returning a label \(\pm 1\) (or anomalously zero, if you happen to pick a point
+on the hyperplane, which can be remedied by making one side's boundary soft, by
+changing \(>\) to \(\geq\)).
+
+As the major `quantum' modification, we will discuss how the constrained linear
+algebra computation is offloaded to a quantum circuit in \autoref{sec:vqa}.
