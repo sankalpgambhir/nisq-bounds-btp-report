@@ -1,0 +1,88 @@
+% intro.tex
+
+% intro to problems of learning and classification
+There has been long-standing interest in constructing systems capable of
+learning from experience since even before computers in their modern form have
+existed. In the last few decades, with computing power skyrocketing
+exponentially coupled with leaping advances in theory of learning systems and
+statistical inference, these problems became tractable and eventually came into
+use ubiquitously. With applications ranging from image recognition systems for
+surveillance to identifying cosmic objects for astrophysical applications, they
+have found widespread adoption in industry and academia. These systems excel in
+problems where producing a precise mathematical model for the problem at hand is
+intractable, exploiting general techniques to instead infer a model from
+available data. With their advent, however, has come an ever rising need for
+computing power to facilitate their operation. This has found data centers of
+unprecedented scales consuming enormous amounts of power to provide the instant
+predictions we've come to rely on.
+
+% intro to how quantum may solve it
+With snowballing energy and space requirements of classical computers in the
+form of GPU clusters and Application Specific Integrated-Circuits (ASICs), there
+has been a spark of interest in offloading this computation onto quantum
+computers, which, till recently, have largely remained a rare species spotted
+only in labs surrounded by helium-cooled superconductors and white-coated
+predators. Current scales of available quantum computers (~100 physical qubits),
+however, still lack the power required to fully tackle these challenges while
+maintaining reliable error-levels or adding their own error checking and
+correction. This has motivated using quantum computers to run bottle necked
+computational subroutines with classical control systems. As such, these systems
+generally lack error correction, and thus earn themselves the title of `noisy'.
+These form the basis of computation considered in this thesis, Noisy
+Intermediate-Scale Quantum (NISQ) computers.
+
+However, making these computers fault-tolerant in practice has been a tall
+order, and seems to be at least a few years away. The strategy today is thus to
+explore how we can use NISQ systems to achieve a quantum advantage. However,
+working with NISQ, one must account for the limited number and connectivity of
+qubits, as well as the incoherence issues that limit circuit depth
+\cite{cerezo2021vqa}. To tackle these issues and approach a quantum advantage,
+variational quantum algorithms (VQAs) have emerged as the leading candidate. As
+an analogue to classical machine learning techniques, they leverage the toolbox
+of optimization techniques, outsourcing the memory requirement and parameter
+control to a classical counterpart. 
+
+VQAs are characterized by parametrized quantum circuits, wherein the parameters
+are controlled by a classical computer running an optimization routine, updating
+them based on the measurement outcomes of the circuit. The technique has shown
+great promise and bypasses several of the issues arising from the lack of
+capability for error checking and correction, in turn arising from the small
+number of available qubits, in quantum computers expected to be manufactured
+within the next few years. The bulk of the computation requiring memory, such as
+parameter updation and gradient computation for optimization is generally
+performed on the classical controller. Effectively, VQAs trade the coherence
+required for independent quantum computation against access to classical memory.
+
+Recently, these computers have been developed and used for experiments on
+supervised learning tasks, either by performing the learning task on a quantum
+computer, or by using on to speed up subtasks such as kernel-estimation
+\cite{Havlíček2019,farhi2018arxivclassification}. Recently, there has been
+significant progress towards solving currently looming problems such as barren
+plateus \cite{zhang2020trainability}, and these models have also been show to be
+reasonably robust and error-tolerant in simulations
+\cite{schuld2020circuitcentric}. 
+
+Despite the promising advances in VQAs driven by access to a classical
+puppeteer, the benefits cannot be taken for granted. Communication with a
+classical system comes at its own cost, one paid in information entropy. These
+costs have been long studied in purely classical information channels, bounding
+the `amount of data' that can be transferred over a channel between two parts of
+a system communicating with each other. This cost fundamentally limits the size
+of problems that can be computed by the system. Communicating over a classical
+channel, there is no basis to expect VQAs to be free from these chains either.
+
+\subsection{Outline of New Results}
+In this thesis, we study the architecture of a VQA, the processes, and
+mathematical structures involved in its functioning. Finally, we establish an
+information theoretic uncertainty theorem that bounds the expressiveness of a
+VQA ansatz choice in practice, limiting the problems computable within VQAs, by
+establishing a tradeoff with its trainability.
+
+% report structure
+\subsection{Structure}
+In \autoref{sec:prelim}, definitions and relevant results in classical
+computing, physics, and quantum information are presented.  \autoref{sec:vqa}
+reviews Variational Quantum Algorithms and their architecture, while
+\autoref{sec:infolimits} discusses bounds on their expressiveness imposed by the
+architecture.
+
