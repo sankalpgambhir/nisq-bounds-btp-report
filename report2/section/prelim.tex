@@ -1,0 +1,142 @@
+% prelim.tex
+
+% classical prelims
+\subsection{Classical Computing}
+% learning
+
+% how optimise
+\subsubsection{Optimisation Techniques}
+The discussion of optimization techniques in classical computing is a long and
+arduous one. We refer the reader to a common text on the matter for a detailed
+discussion \cite{boyd2004convex,nocedal2006numerical}, while reviewing the
+general ideas briefly here.
+
+% actual discussion of common techniques
+The goal of an optimization problem, given (generally) a function
+\(\loss:X\to\reals\) is to find the minimum value in its range, and sometimes an
+inverse in the domain, i.e., output a point \(x_* \in X\), such that
+
+\begin{gather*}
+    x_* = \text{arg min } \loss(x)~,
+\end{gather*}
+
+or the argument to \(\loss\) which minimizes it. In some problems, a local
+minima may suffice, and in others, a global minimum may be the requirement.
+Depending on the nature of the domain \(X\), different techniques may be
+employed to find \(x_*\). These include gradient descent and its reductions
+(finite element methods, etc.), Hessian-aided descent,  stochastic gradient
+descent, among others. The rest of the discussion is agnostic of the
+optimization routine, beyond, of course, the existence of one.
+
+In a NISQ system, there is generally little to no attempt at error correction,
+and the general goal is to capitalize on what is possible with the short
+available coherence times, without devoting a majority of the system's resources
+to error checking and correction. As such, these systems are unable to support
+high-depth circuits with computationally involved analytical gradient based
+approaches. An effective optimizer in control of such a temporally-bound circuit
+should try to utilize techniques minimizing the number of measurements or
+function evaluations, as the relevant modules generally form the bottleneck of
+the computation \cite[see][chapter II.D]{bharti2021noisy}.
+
+% qm prelims
+\subsection{Quantum Regime}
+
+% hilbert space
+\subsubsection{Hilbert Space}
+\begin{definition}
+    A Hilbert space is a vector space \(\hilbertspace\) equipped with an inner
+    product \(\innerproductabstract{f}{g} \;\forall f, g \in \hilbertspace\) such that
+    the norm defined by
+
+    \begin{equation*}
+        \norm{f} = \sqrt{\innerproductabstract{f}{f}}
+    \end{equation*}
+
+    turns \(\hilbertspace\) into a complete metric space
+    \cite{sansone1959orthogonal}.
+\end{definition}
+
+Physical quantities --- such as energy, momentum, and position --- are
+represented as operators over a Hilbert space \(\hilbertspace\) to which the
+wavefunctions belong \cite{hall2013quantum}. 
+For our purposes, we will assume \(\hilbertspace\) to always
+have as its base field the field of complex numbers, \(\complex\).
+
+Herein, the complex inner product is assumed to be linear in the second factor,
+i.e.,
+
+\begin{equation*}
+    \innerproductabstract{f}{\lambda g} = \lambda \innerproductabstract{f}{g}; \quad \innerproductabstract{\lambda f}{g} = \conjugate{\lambda} \innerproductabstract{f}{g}
+\end{equation*}
+
+\(\forall f, g \in \hilbertspace\) and \(\lambda \in \complex\). 
+
+For every bounded operator \(A\) acting on a Hilbert Space, there is a unique
+bounded operator \(A^*\) called its \emph{adjoint} such that
+
+\begin{equation*}
+    \innerproductabstract{f}{Ag} = \innerproductabstract{A^*f}{g}~.
+\end{equation*}
+
+We will assume relevant quantities to be linear operators \(\cdot :
+\hilbertspace \to \hilbertspace\) with adjoints where necessary,
+\cite[see][Appendix A]{hall2013quantum} for details.
+
+% schrodinger
+% \subsubsection{Schr\"odinger Equation}
+% Given a \emph{Hamiltonian} operator \(\hamiltonian\) for a system represented by
+% a wavefunction \(\psi\), its time evolution is given by the Schr\"odinger
+% equation,
+
+% \begin{equation}
+%     \frac{\partial{\psi}}{\partial{t}} = \frac{1}{\iota\hbar} \hamiltonian \psi~.
+%     \label{eq:schrodinger}
+% \end{equation}
+
+% quantum computer
+\subsubsection{Quantum Computation}
+In a quantum system, `computation' in its essence is jugglery of probability
+amplitudes of states using unitary actions. After action of unitaries as
+necessary, the coefficients are estimated using a measurement schema and
+post-processed to recover the computational result. See
+\cite{nielsen2002quantum} for a detailed study.
+
+% quantum embedding
+\subsubsection{State Construction and Embedding}
+To perform computation in the quantum regime, data first needs to be converted
+to a format in which it can be acted upon by quantum operators. This is again an
+embedding function, specifically from the input domain to the Hilbert space of
+quantum states for the system ansatz. See \cite{lloyd2020quantum} for details.
+
+% distance measures
+\subsubsection{Information Matrices and Distance Measures}
+\label{subsubsec:distanceinfo}
+
+Consider a parametrized distance function on quantum states 
+
+\begin{equation}
+    d(\parameters, \parameters') = d(\rho(\parameters), \rho(\parameters'))~.
+\end{equation}
+
+For close enough \(\parameters\) and \(\parameters'\) we can write a Taylor
+expansion of the distance function. Clearly, the zeroth and first terms vanish,
+as the distance of a state from itself is zero, and it forms a minimum for the
+distance function. We have then the second order term
+
+\begin{equation}
+    d(\rho(\parameters), \rho(\parameters+\perturbdel)) = \frac{1}{2} \perturbdel^\top F(\parameters)\perturbdel~,
+\end{equation}
+
+with \(F\) representing the metric tensor
+
+\begin{equation}
+    F(\parameters) = \frac{\partial^2}{\partial\delta_i\partial\delta_j} d(\parameters, \parameters + \perturbdel) \bigg\vert_{\perturbdel = 0}~.
+\end{equation}
+
+Therefore, \(F\) captures all the information necessary to define a distance
+metric. \(F\) is called the Quantum Fisher Information Matrix
+\cite{meyer2021fisher}, and it is defined as
+
+\begin{equation}
+    \left[F_{ij}\right] = 4\text{Re} \left[\braket*{\partial_i\psi(\parameters)}{\partial_j\psi(\parameters)} - \braket*{\partial_i\psi(\parameters)}{\psi(\parameters)}\braket*{\psi(\parameters)}{\partial_j\psi(\parameters)}\right]~.
+\end{equation}
