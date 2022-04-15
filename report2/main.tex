@@ -16,7 +16,7 @@
     titles=bf,
     hanging-titles=true,
     cleanlook, printdayoff, % isodate options
-    draft % draft | final
+    final % draft | final
 ]
 {skrapport} 
 \colortheme{skdoc}
@@ -41,7 +41,7 @@
 
 % setup packages, macros, notes
 \newcounter{notes}
-\setcounter{notes}{1}
+\setcounter{notes}{0}
 \input{macro}
 
 \begin{document}
@@ -49,17 +49,17 @@
     \begin{titlepage}
         \maketitle
         \begin{abstract}
-            In this report, we review the classical classification problem,
-            common techniques to solve it, then identify computational bottle
-            necks. We introduce and review Variational Quantum Algorithms (VQA),
-            which form a model of computation on Noisy Intermediate-Scale
-            Quantum (NISQ) computers, to perform relevant computation on quantum
-            computers instead. We present a mathematical review of the structure
-            of involved spaces, and discuss the constraints on computational
-            precision imposed by the architecture. Finally, we discuss these
-            information-theoretic bounds from contexts in optimal control to
-            generalize them to VQAs, and present a resulting bound on Quantum
-            Support Vector Machines (QSVMs).
+            In this report, we review the classical optimization problems and
+            attempts to solve it using currently achievable quantum computers,
+            called noisy intermediate-scale quantum (NISQ) computers. We present
+            a mathematical review of the structure of involved spaces, and
+            discuss the constraints on computational precision imposed by the
+            architecture. Finally, we discuss these information bounds from
+            contexts in optimal control to generalize them to VQAs, identifying
+            a computational bottle neck and establishing an
+            information-theoretic uncertainty bound on the expressiveness
+            achievable with practically implementable ansatzes for variational
+            quantum algorithms (VQAs).
         \end{abstract}
 
         \listofnotes
@@ -92,7 +92,7 @@
         \input{section/ack}
 
     \phantomsection
-    % \addcontentsline{toc}{section}{References}
+    \addcontentsline{toc}{section}{References}
     \printbibliography
 
     % reset counters

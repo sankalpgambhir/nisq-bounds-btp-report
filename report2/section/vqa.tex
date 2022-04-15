@@ -1,7 +1,5 @@
 % vqa.tex
 
-\notes{bls better}
-
 % definition
 With the goal of optimizing learning computations using quantum computers in
 mind, we need an abstract idea of how to implement this connection. A
@@ -83,9 +81,13 @@ for the chosen ansatz. Here, \(\parameters\) decomposes as a set of vectors of
 parameters \(\vec{\theta}_l\) for each of the indexed layers, which in turn map
 to individual parametrized unitary actions indexed by k. Finally, \(M = K \cdot
 L\) gives the number of trainable parameters of the system \cite[see][section
-II.A]{larocca2021theory}. The experimental apparatus to tune these parameters
+II.A]{larocca2021theory}. The experimental design to tune these parameters
 depends heavily on the hardware design chosen for the PQC, and may be
-mechanical, electronic, or optoelectronic in practice \notes{Cite}.
+mechanical, electronic, or optoelectronic in practice 
+\cite{taylor2005fault,gong2013magnetoelectric,
+stoneham2003optically,wagner1996molecular,
+sederberg2020vectorized,baugher2014optoelectronic,
+angelakis2007proposal}.
 
 This general description of a PQC subsumes most ansatzes studied in literature
 \cite{larocca2021diagnosing}. These include the hardware-efficient ansatz
@@ -124,8 +126,22 @@ parametrized unitary, and \(\phi\) the set of variational parameters. We discuss
 these as subjects of study in the future in \autoref{sec:future}.
 
 \subsubsection{Measurement Scheme}
-The measurement scheme is chosen to evaluate probabilities and determine the
-relevant coefficients using basis changes as necessary. \notes{new material bls}
+to actually extract the information contained in the quantum state and compute
+the relevant objective function, one needs to compute its expectation value.
+This is where the quantum computer is needed to compute the expectation values
+by performing certain operations. For example, the Hadamard test is one way of
+obtaining expectation values. Extracting information from a quantum state means
+gaining information about the amplitudes of whichever basis states that we are
+interested in, but this amplitude is a measure of the probability of that state
+occurring. As such, it is not straight forward and we need to perform certain
+manipulations (by applying relevant quantum gates) so as to ``read-out'' the
+solution state of interest.
+
+In practice, optimization techniques which require fewer measurements or
+function evaluations may be preferred, as a high sampling rate causes the
+measurement process to become a bottleneck for the system. Further, the
+optimization should be reasonably resilient to noise and the limited precision
+of the experimental equipment.
 
 \subsubsection{Parameter Optimization and Classical Control}
 
@@ -144,7 +160,12 @@ koczor2019quantum,gacon2021simultaneous,haug2021natural}.
 \subsection{Quantum Landscape Theory}
 \label{subsec:quantlandscape}
 
-\notes{Better intro here}
+To discuss the limits of an architecture, and the issues associated with it, it
+is most critical to pursue a study of the mathematical structures involved in
+bringing about its functioning. In particular, the mathematical spaces one moves
+through in the process of optimizing using a VQA, and the morphisms that fly one
+over and through these landscapes take center-stage in the discussion at the
+boundary where the architecture breaks down.
 
 In \autoref{subsubsec:pqc}, we suggested the problem of the target unitary not
 existing in the space reachable in our circuit configuration. In this section,
