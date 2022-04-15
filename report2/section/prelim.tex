@@ -25,7 +25,17 @@ minima may suffice, and in others, a global minimum may be the requirement.
 Depending on the nature of the domain \(X\), different techniques may be
 employed to find \(x_*\). These include gradient descent and its reductions
 (finite element methods, etc.), Hessian-aided descent,  stochastic gradient
-descent, among others. The rest of the discussion is agnostic of the
+descent, among others.
+
+The computation of the loss function can be computationally taxing with
+increasing number of parameters, making the optimization impractical to perform
+on conventional computing devices. With the advent of quantum computers, while
+independent quantum computation may seem out of reach, there have been attempts
+at using them as slot-in replacements for speeding up subtasks such as
+loss-function computation. We focus on variational quantum algorithms, where the
+classical computer offloads part of the task to a quantum module in this manner.
+%
+The rest of the discussion is agnostic of the
 optimization routine, beyond, of course, the existence of one.
 
 In a NISQ system, there is generally little to no attempt at error correction,
