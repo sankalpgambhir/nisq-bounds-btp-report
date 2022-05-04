@@ -1,0 +1,53 @@
+% nisq.tex
+
+% what is nisq
+\begin{frame}
+    \frametitle{Noisy Intermediate-Scale Quantum Devices}
+
+    \begin{itemize}[<+->]
+        \item Near term devices
+        \item Not large enough to do error checking and correction --- `noisy'
+        \item Few hundred qubits expected --- `intermediate-scale'
+        \item Low coherence times
+    \end{itemize}
+
+    \notes{These properties leave devices manufacturable in the forseeable future
+    unable to live up to the `quantum hype', atleast in a purist's mind. }
+
+\end{frame}
+
+% where can it work
+\begin{frame}
+    \frametitle{NISQ Devices --- Utility}
+
+    What are NISQ devices good for then?
+
+    \pause
+
+    \begin{itemize}
+        \item Computations resilient to noise
+        \item Computations with low processing times
+    \end{itemize}
+
+    \pause
+
+    \notes{This suggests, rather than using these devices for independent computation,
+    perhaps it's better to use them to run subroutines.} 
+    %
+    Any actual examples to speak of?
+
+\end{frame}
+
+\begin{frame}
+
+    \begin{itemize}
+        \item Quantum Approximate Optimization Algorithms (QAOAs)
+        \item Quantum Variational Eigensolvers (QVEs)
+        \item Ground State Estimation
+        \item Polynomial Unconstrained Binary Optimization (PUBO)
+                \footfullcite{bittel2021trainingvqa}
+                \notes{H is a polynomial of the variables, which take 0/1}
+    \end{itemize}
+
+
+\end{frame}

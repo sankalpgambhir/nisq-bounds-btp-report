@@ -1,0 +1,115 @@
+% main.tex
+% Bachelor's Thesis
+% ***
+%   Information Theoretic Error Bounds on 
+%   NISQ Learning Systems
+% ***
+% 2021-22
+% Sankalp Gambhir
+% 180260032
+
+\documentclass[
+    aspectratio=169,
+    xcolor={dvipsnames},
+    % handout,
+    % draft
+]
+{beamer} 
+
+% \usetheme[
+%     section page = progressbar,
+%     progressbar = foot,
+%     background = light,
+%     block = transparent,
+% ]{metropolis}
+
+% setup packages, macros, notes
+\newcounter{notes}
+\setcounter{notes}{0}
+\input{macro}
+
+% meta info
+\title{
+    {\huge Information Theoretic Bounds on Variational Quantum Algorithms} \\
+    {\large B.Tech Project II}
+    }
+\author[sgambhir@iitb.ac.in]{
+    Sankalp Gambhir \\ 
+    \vspace{1em}
+        {
+            \normalsize 
+            \hspace{0.1em} 
+            Advisor:
+            Prof. Sai Vinjanampathy
+        }
+    \vspace{-1.3em}
+}
+\date{\today}
+
+\begin{document}
+
+    % title page title page
+    \maketitle
+
+    \begin{frame}
+        \frametitle{Outline}
+    
+        \begin{itemize}
+            \item Noisy Intermediate-Scale Quantum Systems
+            \item NISQy Problems and NISQy Solutions
+            \item Variational Quantum Algorithms
+            \item Information Theoretic Bounds \emph{(Our results)}
+        \end{itemize}
+    
+    \end{frame}
+
+    % % why qc?
+    % % problems with it
+    % \input{sections/qc}
+
+    % nisq
+    % what can it do?
+    \section{NISQ Systems}
+    \input{sections/nisq}
+
+    % vqa
+    % what can you do with a subsystem
+    % examples of solvable problems
+    % hardness of classical optimization
+    \section{Quantum Bandaid}
+    \input{sections/problems}
+
+    % % classification problem
+    % % classical optimization is hard
+    % % but nisq compatible?
+    % % lead up to vqa
+    % \input{sections/classical}
+
+    % vqa
+    % components
+    % pqc
+    % dla
+    % qlt
+    \section{Variational Quantum Algorithms}
+    \input{sections/vqa}
+
+    % % info theory
+    % % why limit
+    % % qoc
+    % % limits on svm
+    % % experiments
+    % \input{sections/infolim}
+
+    % info theory
+    % why limit
+    % qoc
+    % ansatz expressibility
+    % trainability tradeoff
+    % limits of expressibility
+    \section{Information Theoretic Bounds}
+    \input{sections/infolim}
+
+    \begin{frame}{References}
+        \printbibliography
+    \end{frame}
+\end{document}
